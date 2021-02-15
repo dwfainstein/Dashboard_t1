@@ -4,6 +4,7 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
@@ -12,25 +13,50 @@ library(flexdashboard)
 
 Column {data-width=650}
 -----------------------------------------------------------------------
-
-### Chart A
+February is the Cruelest Month
+======================
+### Chart One
 
 ```{r}
 
+library(tidyverse)
+library(plotly)
+library(shiny)
+p1 <- mtcars %>% 
+  ggplot(aes(wt, mpg, col=as_factor(cyl))) +
+  geom_point() +
+  facet_grid(~cyl)
+
+renderPlotly(p1)
+
 ```
+
+Weird Flex
+==========================
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Chart Two
 
 ```{r}
+
+mtcars %>% 
+  ggplot(aes(wt, mpg, col=as_factor(cyl))) +
+  geom_point()
 
 ```
 
-### Chart C
+And OK
+============================
+### Chart Three
 
 ```{r}
+
+mtcars %>% 
+  ggplot(aes(wt, mpg, col=as_factor(cyl))) +
+  geom_point() +
+  facet_grid(~cyl)
 
 ```
 
